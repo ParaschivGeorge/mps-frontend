@@ -1,3 +1,9 @@
+# Travis-CI
+This project is deployed at each master branch change. Please run "ng build --prod" before pushing changes to master. 
+
+# Firebase
+This project is deployed on firebase at url: https://final-whistle.firebaseapp.com/
+
 # MpsFrontend
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.4.
