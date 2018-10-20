@@ -11,6 +11,8 @@ export class CardComponent implements OnInit {
   constructor() { }
 
   card: Card;
+  width: number;
+  height: number;
 
   ngOnInit() {
     this.card = {
@@ -22,6 +24,8 @@ export class CardComponent implements OnInit {
       team: 'Boschetar',
       photo_url: 'https://hearthcards.ams3.digitaloceanspaces.com/33/58/8d/5b/33588d5b.png'
     };
+    this.width = 400;
+    this.height = 600;
   }
 
 }
