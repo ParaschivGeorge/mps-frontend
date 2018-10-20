@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col-3 card-box">
+    <h2>Box 1</h2>
+  
+    <div
+      class="card-container"
+      cdkDropList
+      #box1list="cdkDropList"
+      [cdkDropListData]="box1"
+      [cdkDropListConnectedTo]="[box2list]"
+      (cdkDropListDropped)="drop($event)">
+      <app-card class="card" *ngFor="let card of box1" [card]="card" cdkDrag></app-card>
+    </div>
+  </div>
+  
+  <div class="col-3 card-box">
+    <h2>Box 2</h2>
+  
+    <div
+      class="card-container"
+      cdkDropList
+      #box2list="cdkDropList"
+      [cdkDropListData]="box2"
+      [cdkDropListConnectedTo]="[box1list]"
+      (cdkDropListDropped)="drop($event)">
+      <app-card class="card" *ngFor="let card of box2" [card]="card" cdkDrag></app-card>   
+    </div>
+  </div>
+  
+</div>
