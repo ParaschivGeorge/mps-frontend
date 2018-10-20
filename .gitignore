@@ -35,8 +35,11 @@ yarn-error.log
 testem.log
 /typings
 
-#logs
-/mps-frontend 
+# logs
+/mps-frontend
+
+# firebase
+.firebase
 
 # e2e
 /e2e/*.js
