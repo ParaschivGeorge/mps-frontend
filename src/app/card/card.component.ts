@@ -22,9 +22,6 @@ export class CardComponent implements OnInit {
       team: 'Boschetar',
       photo_url: 'https://hearthcards.ams3.digitaloceanspaces.com/33/58/8d/5b/33588d5b.png'
     };
-
-    console.log(this.card.photo_url);
-    
   }
 
 }
