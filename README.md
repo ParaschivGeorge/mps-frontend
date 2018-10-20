@@ -1,5 +1,5 @@
 # Travis-CI
-This project is deployed at each master branch change. Please run "ng build --prod" before pushing changes to master. 
+This project is deployed at each master branch change. Please run 'ng build --prod' before pushing changes to master. 
 
 # Firebase
 This project is deployed on firebase at url: https://final-whistle.firebaseapp.com/
