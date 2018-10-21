@@ -13,7 +13,7 @@ before_script:
   - npm install -g @angular/cli
 
 script:
-  - cp -r ./node_modules/ngx-socket-io/node_modules/* ./node_modules && rm -R ./node_modules/ngx-socket-io/node_modules  
+  - rm -R ./node_modules/ngx-socket-io/node_modules   
   - ng build --prod --configuration=production
 
 after_success:
