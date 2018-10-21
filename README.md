@@ -1,3 +1,6 @@
+## Sockets.io and Ng7 conflict:
+To run the project first run `npm install` then cut and replace the contents of `./node_modules/ngx-socket-io/node_modules` over `./node_modules`. Also remove the `./node_modules/ngx-socket-io/node_modules` folder. (`cp -r ./node_modules/ngx-socket-io/node_modules/* ./node_modules && rm -R ./node_modules/ngx-socket-io/node_modules`)
+
 # Travis-CI
 This project is deployed at each master branch change. Please run `ng build --prod --configuration=production` before pushing changes to master. 
 
