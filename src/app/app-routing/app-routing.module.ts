@@ -2,10 +2,12 @@ import { NgModule } from '@angular/core';
 import { ErrorPageComponent } from '../error-page/error-page.component';
 import { Routes, RouterModule } from '@angular/router';
 import { BoardComponent } from '../board/board.component';
+import { SocketsTestComponent } from '../sockets-test/sockets-test.component';
 
 const app_Routes: Routes = [
   { path: '', redirectTo: 'board', pathMatch: 'full'},
   { path: 'board', component: BoardComponent},
+  { path: 'sockets-test', component: SocketsTestComponent},
   { path: 'not-found', component: ErrorPageComponent},
   { path: '**', redirectTo: 'not-found' } // this should always be the last route!
   /* { path: '', redirectTo: '/somewhere-else', pathMatch: 'full' }
