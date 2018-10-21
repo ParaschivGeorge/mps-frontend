@@ -11,12 +11,20 @@ export class CardComponent implements OnInit {
   constructor() { }
 
   @Input() card: Card;
-  width: number;
-  height: number;
+  @Input() width: number;
+  @Input() height: number;
 
-  ngOnInit() {
-    this.width = 200;
-    this.height = 300;
+  ngOnInit() {}
+
+  getWidth() {
+    return this.width.toString;
+  }
+
+  getCardCoverStyle() {
+    return {
+      'min-width': this.width.toString,
+      'min-height': this.height.toString
+    };
   }
 
 }

@@ -9,7 +9,14 @@
       [cdkDropListData]="box1"
       [cdkDropListConnectedTo]="[box2list]"
       (cdkDropListDropped)="drop($event)">
-      <app-card class="card" *ngFor="let card of box1" [card]="card" cdkDrag></app-card>
+      <app-card
+        class="card"
+        *ngFor="let card of box1"
+        [card]="card"
+        [width]="cardWidth"
+        [height]="cardHeight"
+        cdkDrag>
+      </app-card>
     </div>
   </div>
   
@@ -23,7 +30,14 @@
       [cdkDropListData]="box2"
       [cdkDropListConnectedTo]="[box1list]"
       (cdkDropListDropped)="drop($event)">
-      <app-card class="card" *ngFor="let card of box2" [card]="card" cdkDrag></app-card>   
+      <app-card
+        class="card"
+        *ngFor="let card of box2"
+        [card]="card"
+        [width]="cardWidth"
+        [height]="cardHeight"
+        cdkDrag>
+      </app-card>   
     </div>
   </div>
   
