@@ -1,4 +1,4 @@
-## Sockets.io and Ng7 conflict:
+# Sockets.io and Ng7 conflict:
 To run the project first run `npm install` then delete the folder `./node_modules/ngx-socket-io/node_modules` (`rm -R ./node_modules/ngx-socket-io/node_modules`).
 
 # Travis-CI
