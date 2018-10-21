@@ -11,6 +11,8 @@ export class BoardComponent implements OnInit {
 
   box1: Card[] = [];
   box2: Card[] = [];
+  cardWidth = 200;
+  cardHeight = 300;
 
   constructor() { }
 
