@@ -7,6 +7,8 @@ import { CardComponent } from './card/card.component';
 import { SafeUrlPipe } from './utils/safe-url.pipe';
 import { BoardComponent } from './board/board.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ErrorPageComponent } from './error-page/error-page.component';
+import { AppRoutingModule } from './app-routing/app-routing.module';
 
 
 @NgModule({
@@ -14,11 +16,13 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     AppComponent,
     CardComponent,
     SafeUrlPipe,
-    BoardComponent
+    BoardComponent,
+    ErrorPageComponent
   ],
   imports: [
     BrowserModule,
-    DragDropModule
+    DragDropModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
