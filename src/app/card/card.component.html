@@ -1,1 +1,8 @@
-<img [src]="card.photo_url | safeUrl" [width]="width" [height]="height">
+<div class="row">
+    <img [src]="card.photo_url | safeUrl" [width]="width" [height]="height">
+    <div class="card-bgv btn-group-vertical">
+        <div class="stats-btn btn btn-warning disabled">{{card.attack}}</div>
+        <div class="stats-btn btn btn-danger disabled">{{card.heatlh}}</div>
+    </div>
+</div>
+
