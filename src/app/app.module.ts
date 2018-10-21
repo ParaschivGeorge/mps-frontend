@@ -13,6 +13,7 @@ import { ErrorPageComponent } from './error-page/error-page.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { SocketsTestComponent } from './sockets-test/sockets-test.component';
 import { SocketsTestService } from './sockets-test.service';
+import { MinionSelectorComponent } from './minion-selector/minion-selector.component';
 
 const config: SocketIoConfig = { url: environment.apiUrl, options: {} };
 
@@ -23,7 +24,8 @@ const config: SocketIoConfig = { url: environment.apiUrl, options: {} };
     SafeUrlPipe,
     BoardComponent,
     ErrorPageComponent,
-    SocketsTestComponent
+    SocketsTestComponent,
+    MinionSelectorComponent
   ],
   imports: [
     BrowserModule,

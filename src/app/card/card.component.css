@@ -1,8 +1,12 @@
 .card-bgv {
     position: absolute;
-    left: 150px;
 }
 
 .stats-btn {
     opacity: 1;
+}
+
+.card-cover-btn {
+    position: absolute;
+    opacity: 0;
 }
