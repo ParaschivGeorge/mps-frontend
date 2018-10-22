@@ -5,9 +5,17 @@
         [style.width.px]="width"
         [style.height.px]="height">
     </div>
-    <div class="card-bgv btn-group-vertical" [style.left.px]="width-50">
-        <div class="stats-btn btn btn-warning disabled">{{card.attack}}</div>
-        <div class="stats-btn btn btn-danger disabled">{{card.heatlh}}</div>
+    <div
+        *ngIf="showStats"
+        class="stats-btn btn btn-warning disabled"
+        [style.left.px]="8"
+        [style.top.px]="height-25">{{card.attack}}
+    </div>
+    <div
+        *ngIf="showStats"
+        class="stats-btn btn btn-danger disabled"
+        [style.left.px]="width-50"
+        [style.top.px]="height-25">{{card.heatlh}}
     </div>
 </div>
 

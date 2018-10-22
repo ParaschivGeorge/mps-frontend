@@ -14,6 +14,7 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
 import { SocketsTestComponent } from './sockets-test/sockets-test.component';
 import { SocketsTestService } from './sockets-test.service';
 import { MinionSelectorComponent } from './minion-selector/minion-selector.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const config: SocketIoConfig = { url: environment.apiUrl, options: {} };
 
@@ -31,7 +32,8 @@ const config: SocketIoConfig = { url: environment.apiUrl, options: {} };
     BrowserModule,
     DragDropModule,
     AppRoutingModule,
-    SocketIoModule.forRoot(config)
+    SocketIoModule.forRoot(config),
+    ReactiveFormsModule
   ],
   providers: [SocketsTestService],
   bootstrap: [AppComponent]
