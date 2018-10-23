@@ -15,6 +15,7 @@ import { SocketsTestComponent } from './sockets-test/sockets-test.component';
 import { SocketsTestService } from './sockets-test.service';
 import { MinionSelectorComponent } from './minion-selector/minion-selector.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FunctionalCardSelectorComponent } from './functional-card-selector/functional-card-selector.component';
 
 const config: SocketIoConfig = { url: environment.apiUrl, options: {} };
 
@@ -26,7 +27,8 @@ const config: SocketIoConfig = { url: environment.apiUrl, options: {} };
     BoardComponent,
     ErrorPageComponent,
     SocketsTestComponent,
-    MinionSelectorComponent
+    MinionSelectorComponent,
+    FunctionalCardSelectorComponent
   ],
   imports: [
     BrowserModule,
