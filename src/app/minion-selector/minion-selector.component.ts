@@ -27,7 +27,6 @@ export class MinionSelectorComponent implements OnInit {
     this.allCards.forEach(card => {
       cardSelectionFormArray.push(new FormControl(null));
     });
-
     this.cardSelectionForm = new FormGroup({'cardsSelectors': cardSelectionFormArray});
   }
 
@@ -38,13 +37,9 @@ export class MinionSelectorComponent implements OnInit {
   getCardsNumbers(row: number): number[] {
     const cardsNumbers: number[] = [];
 
-    cardsNumbers.push(0 + row * 6);
-    cardsNumbers.push(1 + row * 6);
-    cardsNumbers.push(2 + row * 6);
-    cardsNumbers.push(3 + row * 6);
-    cardsNumbers.push(4 + row * 6);
-    cardsNumbers.push(5 + row * 6);
-
+    for (let i = row * 6; i < (row + 1) * 6; i++) {
+      cardsNumbers.push(i);
+    }
     return cardsNumbers;
   }
 
@@ -52,7 +47,6 @@ export class MinionSelectorComponent implements OnInit {
     if (this.cardsSelectors.controls[formNumber].value) {
       return 1;
     }
-
     return 0.65;
   }
 
@@ -62,14 +56,11 @@ export class MinionSelectorComponent implements OnInit {
 
   onSubmit() {
     this.selectedCards = [];
-
     for (let i = 0; i < 24; i++) {
       if (this.cardsSelectors.controls[i].value) {
         this.selectedCards.push(this.allCards[i]);
       }
     }
-
     console.log('You have selected the cards: ', this.selectedCards);
   }
-
 }
