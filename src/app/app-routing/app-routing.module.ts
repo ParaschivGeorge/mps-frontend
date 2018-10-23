@@ -7,7 +7,7 @@ import { MinionSelectorComponent } from '../minion-selector/minion-selector.comp
 import { FunctionalCardSelectorComponent } from '../functional-card-selector/functional-card-selector.component';
 
 const app_Routes: Routes = [
-  { path: '', redirectTo: 'functional-card-selector', pathMatch: 'full'},
+  { path: '', redirectTo: 'minion-selector', pathMatch: 'full'},
   { path: 'board', component: BoardComponent},
   { path: 'sockets-test', component: SocketsTestComponent},
   { path: 'minion-selector', component: MinionSelectorComponent},

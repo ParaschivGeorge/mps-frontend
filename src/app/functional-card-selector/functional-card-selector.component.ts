@@ -15,6 +15,7 @@ export class FunctionalCardSelectorComponent implements OnInit {
   cardHeight = 300;
   cardShowStats = false;
   cardSelectionForm: FormGroup;
+  validCardNumber = 5;
 
   photo_url = 'https://hearthcards.ams3.digitaloceanspaces.com/33/58/8d/5b/33588d5b.png'; // remove this
 
@@ -27,7 +28,7 @@ export class FunctionalCardSelectorComponent implements OnInit {
     this.allCards.forEach(card => {
       cardSelectionFormArray.push(new FormControl(null));
     });
-    this.cardSelectionForm = new FormGroup({'cardsSelectors': cardSelectionFormArray});
+    this.cardSelectionForm = new FormGroup({'cardsSelectors': cardSelectionFormArray}, this.CardsSelectorValidator.bind(this));
   }
 
   getRowNumbers(): number[] {
@@ -53,14 +54,42 @@ export class FunctionalCardSelectorComponent implements OnInit {
   get cardsSelectors(): FormArray {
     return <FormArray>this.cardSelectionForm.get('cardsSelectors');
   }
-
   onSubmit() {
+    if (!this.cardSelectionForm.valid) {
+      console.log('You must select ', this.validCardNumber, ' cards');
+      return;
+    }
     this.selectedCards = [];
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < this.allCards.length; i++) {
       if (this.cardsSelectors.controls[i].value) {
         this.selectedCards.push(this.allCards[i]);
       }
     }
     console.log('You have selected the cards: ', this.selectedCards);
+  }
+
+  CardsSelectorValidator(c: FormGroup) {
+    let count = 0;
+
+    (<FormArray>(c.get('cardsSelectors'))).controls.forEach(control => {
+      if (control.value) {
+        count++;
+      }
+    });
+    if (count !== this.validCardNumber) {
+      return { wrongNumber: true };
+    }
+    return null;
+  }
+
+  getSelectedCardsCount(): number {
+    let count = 0;
+
+    this.cardsSelectors.controls.forEach(control => {
+      if (control.value) {
+        count++;
+      }
+    });
+    return count;
   }
 }
