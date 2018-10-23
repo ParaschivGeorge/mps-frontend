@@ -13,6 +13,8 @@ export class CardComponent implements OnInit {
   @Input() card: Card;
   @Input() width: number;
   @Input() height: number;
+  @Input() opacity: number;
+  @Input() showStats: boolean;
 
   ngOnInit() {}
 

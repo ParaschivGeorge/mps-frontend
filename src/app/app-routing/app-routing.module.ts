@@ -3,11 +3,13 @@ import { ErrorPageComponent } from '../error-page/error-page.component';
 import { Routes, RouterModule } from '@angular/router';
 import { BoardComponent } from '../board/board.component';
 import { SocketsTestComponent } from '../sockets-test/sockets-test.component';
+import { MinionSelectorComponent } from '../minion-selector/minion-selector.component';
 
 const app_Routes: Routes = [
-  { path: '', redirectTo: 'board', pathMatch: 'full'},
+  { path: '', redirectTo: 'minion-selector', pathMatch: 'full'},
   { path: 'board', component: BoardComponent},
   { path: 'sockets-test', component: SocketsTestComponent},
+  { path: 'minion-selector', component: MinionSelectorComponent},
   { path: 'not-found', component: ErrorPageComponent},
   { path: '**', redirectTo: 'not-found' } // this should always be the last route!
   /* { path: '', redirectTo: '/somewhere-else', pathMatch: 'full' }
