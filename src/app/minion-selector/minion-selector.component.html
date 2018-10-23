@@ -1,28 +1,11 @@
 <form [formGroup]="cardSelectionForm" (ngSubmit)="onSubmit()">
   <div formArrayName="cardsSelectors">
-    <div class="row">
-      <div class="col-2" *ngFor="let i of getCardsNumbers(0)">
-        <app-card [card]="allCards[i]" [width]="cardWidth" [height]="cardHeight" [showStats]="cardShowStats"></app-card>
-        <input type="checkbox" [formControlName]="i">
+    <div class="row" *ngFor="let j of getRowNumbers()">
+      <div class="col-2" *ngFor="let i of getCardsNumbers(j)">
+        <app-card [card]="allCards[i]" [width]="cardWidth" [height]="cardHeight" [showStats]="cardShowStats" [opacity]="getCardOpacity(i)"></app-card>
+        <input type="checkbox" [style.width.px]="cardHeight" [style.height.px]="cardHeight" class="selector-checkbox" [formControlName]="i">
       </div>
     </div>
-    <div class="row">
-      <div class="col-2" *ngFor="let i of getCardsNumbers(1)">
-          <app-card [card]="allCards[i]" [width]="cardWidth" [height]="cardHeight" [showStats]="cardShowStats"></app-card>
-          <input type="checkbox" [formControlName]="i">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-2" *ngFor="let i of getCardsNumbers(2)">
-          <app-card [card]="allCards[i]" [width]="cardWidth" [height]="cardHeight" [showStats]="cardShowStats"></app-card>
-          <input type="checkbox" [formControlName]="i">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-2" *ngFor="let i of getCardsNumbers(3)">
-          <app-card [card]="allCards[i]" [width]="cardWidth" [height]="cardHeight" [showStats]="cardShowStats"></app-card>
-          <input type="checkbox" [formControlName]="i">
-      </div>
-    </div>
+    <button type="submit">Submit</button>
   </div>
 </form>
