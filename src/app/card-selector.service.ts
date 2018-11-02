@@ -19,7 +19,7 @@ export class CardSelectorService {
   }
 
   getHeroCards(): Observable<any> {
-    return this._httpClient.get<any>(environment.apiUrl + '/hero_card');
+    return this._httpClient.get<any>(environment.apiUrl + '/heroes_cards');
   }
 
   postMinionCards(username: string, cardsIndexList: number[]): Observable<any> {
@@ -31,6 +31,6 @@ export class CardSelectorService {
   }
 
   postHeroCards(username: string, cardIndex: number): Observable<any> {
-    return this._httpClient.post<any>(environment.apiUrl + '/hero_cards_selector', {username: username, card: cardIndex});
+    return this._httpClient.post<any>(environment.apiUrl + '/hero_card_selector', {username: username, card: cardIndex});
   }
 }

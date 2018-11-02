@@ -17,15 +17,15 @@ export class BoardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.box1.push({
-      name: 'Macanache',
-      heatlh: 8,
-      attack: 8,
-      cost: 8,
-      description: 'Cum te bate MACANACHE nu te bate Dumnezeu.',
-      team: 'Boschetar',
-      photo_url: 'https://hearthcards.ams3.digitaloceanspaces.com/33/58/8d/5b/33588d5b.png'
-    });
+    // this.box1.push({
+    //   name: 'Macanache',
+    //   heatlh: 8,
+    //   attack: 8,
+    //   cost: 8,
+    //   description: 'Cum te bate MACANACHE nu te bate Dumnezeu.',
+    //   team: 'Boschetar',
+    //   photo_url: 'https://hearthcards.ams3.digitaloceanspaces.com/33/58/8d/5b/33588d5b.png'
+    // });
   }
 
   drop(event: CdkDragDrop<Card[]>) {

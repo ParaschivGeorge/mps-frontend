@@ -1,11 +1,9 @@
-export interface MinionCard {
-    Attack: number;
-    Club: string;
-    Cost: number;
-    Country: string;
-    Defense: number;
-    Name: string;
-    Position: string;
-    'Special Trait': string;
-    URL: string;
+import { Card } from "./card";
+
+export interface MinionCard extends Card {
+    club: string;
+    cost: number;
+    country: string;
+    position: string;
+    special_trait: string;
 }

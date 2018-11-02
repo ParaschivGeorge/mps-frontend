@@ -3,6 +3,7 @@ import { Card } from '../interfaces/card';
 import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@angular/forms';
 import { CardSelectorService } from '../card-selector.service';
 import { MinionCard } from '../interfaces/minion-card';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-minion-selector',
@@ -11,27 +12,30 @@ import { MinionCard } from '../interfaces/minion-card';
 })
 export class MinionSelectorComponent implements OnInit {
 
-  allCards: Card[] = [];
-  selectedCards: Card[] = [];
+  allCards: MinionCard[] = [];
+  selectedCards: MinionCard[] = [];
   cardWidth = 120;
   cardHeight = 180;
   cardShowStats = false;
   cardSelectionForm: FormGroup;
   validCardNumber = 11;
-  maxCost = 120;
+  maxCost = 110;
 
-  photo_url = 'https://hearthcards.ams3.digitaloceanspaces.com/33/58/8d/5b/33588d5b.png'; // remove this
-
-  constructor(private _cardSelectorService: CardSelectorService) { }
+  constructor(private _cardSelectorService: CardSelectorService, private _router: Router) { }
 
   ngOnInit() {
-    /* PLS IGNORE THIS CHAOS */ this.allCards.push({name: 'Macanache', heatlh: 1, attack: 1, cost: 100, description: '', team: '', photo_url: this.photo_url});   this.allCards.push({name: 'Macanache', heatlh: 2, attack: 1, cost: 2, description: '', team: '', photo_url: this.photo_url});    this.allCards.push({name: 'Macanache', heatlh: 3, attack: 1, cost: 3, description: '', team: '', photo_url: this.photo_url});    this.allCards.push({name: 'Macanache', heatlh: 4, attack: 1, cost: 4, description: '', team: '', photo_url: this.photo_url});    this.allCards.push({name: 'Macanache', heatlh: 5, attack: 1, cost: 5, description: '', team: '', photo_url: this.photo_url});    this.allCards.push({name: 'Macanache', heatlh: 6, attack: 1, cost: 6, description: '', team: '', photo_url: this.photo_url});    this.allCards.push({name: 'Macanache', heatlh: 7, attack: 1, cost: 7, description: '', team: '', photo_url: this.photo_url});    this.allCards.push({name: 'Macanache', heatlh: 8, attack: 1, cost: 1, description: '', team: '', photo_url: this.photo_url});    this.allCards.push({name: 'Macanache', heatlh: 9, attack: 1, cost: 1, description: '', team: '', photo_url: this.photo_url});    this.allCards.push({name: 'Macanache', heatlh: 10, attack: 1, cost: 1, description: '', team: '', photo_url: this.photo_url});    this.allCards.push({name: 'Macanache', heatlh: 11, attack: 1, cost: 1, description: '', team: '', photo_url: this.photo_url});    this.allCards.push({name: 'Macanache', heatlh: 12, attack: 1, cost: 1, description: '', team: '', photo_url: this.photo_url});    this.allCards.push({name: 'Macanache', heatlh: 13, attack: 1, cost: 1, description: '', team: '', photo_url: this.photo_url});    this.allCards.push({name: 'Macanache', heatlh: 14, attack: 1, cost: 1, description: '', team: '', photo_url: this.photo_url});    this.allCards.push({name: 'Macanache', heatlh: 15, attack: 1, cost: 1, description: '', team: '', photo_url: this.photo_url});    this.allCards.push({name: 'Macanache', heatlh: 16, attack: 1, cost: 1, description: '', team: '', photo_url: this.photo_url});    this.allCards.push({name: 'Macanache', heatlh: 17, attack: 1, cost: 1, description: '', team: '', photo_url: this.photo_url});    this.allCards.push({name: 'Macanache', heatlh: 18, attack: 1, cost: 1, description: '', team: '', photo_url: this.photo_url});    this.allCards.push({name: 'Macanache', heatlh: 19, attack: 1, cost: 1, description: '', team: '', photo_url: this.photo_url});    this.allCards.push({name: 'Macanache', heatlh: 20, attack: 1, cost: 1, description: '', team: '', photo_url: this.photo_url});    this.allCards.push({name: 'Macanache', heatlh: 21, attack: 1, cost: 1, description: '', team: '', photo_url: this.photo_url});    this.allCards.push({name: 'Macanache', heatlh: 22, attack: 1, cost: 1, description: '', team: '', photo_url: this.photo_url});    this.allCards.push({name: 'Macanache', heatlh: 23, attack: 1, cost: 1, description: '', team: '', photo_url: this.photo_url});    this.allCards.push({name: 'Macanache', heatlh: 24, attack: 1, cost: 1, description: '', team: '', photo_url: this.photo_url});
-    this._cardSelectorService.getMinionCards().subscribe(data => console.log(data));
-    const cardSelectionFormArray = new FormArray([]);
-    this.allCards.forEach(card => {
-      cardSelectionFormArray.push(new FormControl(null));
+    if (!sessionStorage.getItem('username')) {
+      this._router.navigate(['join']);
+    }
+    this._cardSelectorService.getMinionCards().subscribe(cards => {
+      console.log(cards);
+      this.allCards = cards.result;
+      const cardSelectionFormArray = new FormArray([]);
+      this.allCards.forEach(card => {
+        cardSelectionFormArray.push(new FormControl(null));
+      });
+      this.cardSelectionForm = new FormGroup({'cardsSelectors': cardSelectionFormArray}, this.CardsSelectorValidator.bind(this));
     });
-    this.cardSelectionForm = new FormGroup({'cardsSelectors': cardSelectionFormArray}, this.CardsSelectorValidator.bind(this));
   }
 
   getRowNumbers(): number[] {
@@ -64,12 +68,22 @@ export class MinionSelectorComponent implements OnInit {
       return;
     }
     this.selectedCards = [];
+    const selectedCardsIndexes = [];
     for (let i = 0; i < this.allCards.length; i++) {
       if (this.cardsSelectors.controls[i].value) {
         this.selectedCards.push(this.allCards[i]);
+        selectedCardsIndexes.push(i);
       }
     }
     console.log('You have selected the cards: ', this.selectedCards);
+    this._cardSelectorService.postMinionCards(sessionStorage.getItem('username'), selectedCardsIndexes).subscribe(
+      data => {
+        this._router.navigate(['functional-card-selector']);
+      },
+      err => {
+        sessionStorage.removeItem('username');
+        this._router.navigate(['join']);
+    });
   }
 
   CardsSelectorValidator(c: FormGroup) {

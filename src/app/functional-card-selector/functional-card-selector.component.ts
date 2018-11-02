@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Card } from '../interfaces/card';
 import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
+import { CardSelectorService } from '../card-selector.service';
+import { FunctionalCard } from '../interfaces/functional-card';
 
 @Component({
   selector: 'app-functional-card-selector',
@@ -9,26 +12,30 @@ import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@ang
 })
 export class FunctionalCardSelectorComponent implements OnInit {
 
-  allCards: Card[] = [];
-  selectedCards: Card[] = [];
+  allCards: FunctionalCard[] = [];
+  selectedCards: FunctionalCard[] = [];
   cardWidth = 200;
   cardHeight = 300;
   cardShowStats = false;
   cardSelectionForm: FormGroup;
   validCardNumber = 5;
 
-  photo_url = 'https://hearthcards.ams3.digitaloceanspaces.com/33/58/8d/5b/33588d5b.png'; // remove this
-
-  constructor() { }
+  constructor(private _cardSelectorService: CardSelectorService, private _router: Router) { }
 
   ngOnInit() {
-    /* PLS IGNORE THIS CHAOS */ this.allCards.push({name: 'Macanache', heatlh: 1, attack: 1, cost: 1, description: '', team: '', photo_url: this.photo_url});   this.allCards.push({name: 'Macanache', heatlh: 2, attack: 1, cost: 1, description: '', team: '', photo_url: this.photo_url});    this.allCards.push({name: 'Macanache', heatlh: 3, attack: 1, cost: 1, description: '', team: '', photo_url: this.photo_url});    this.allCards.push({name: 'Macanache', heatlh: 4, attack: 1, cost: 1, description: '', team: '', photo_url: this.photo_url});    this.allCards.push({name: 'Macanache', heatlh: 5, attack: 1, cost: 1, description: '', team: '', photo_url: this.photo_url});    this.allCards.push({name: 'Macanache', heatlh: 6, attack: 1, cost: 1, description: '', team: '', photo_url: this.photo_url});    this.allCards.push({name: 'Macanache', heatlh: 7, attack: 1, cost: 1, description: '', team: '', photo_url: this.photo_url});    this.allCards.push({name: 'Macanache', heatlh: 8, attack: 1, cost: 1, description: '', team: '', photo_url: this.photo_url});    this.allCards.push({name: 'Macanache', heatlh: 9, attack: 1, cost: 1, description: '', team: '', photo_url: this.photo_url});    this.allCards.push({name: 'Macanache', heatlh: 10, attack: 1, cost: 1, description: '', team: '', photo_url: this.photo_url});
-
-    const cardSelectionFormArray = new FormArray([]);
-    this.allCards.forEach(card => {
-      cardSelectionFormArray.push(new FormControl(null));
+    if (!sessionStorage.getItem('username')) {
+      this._router.navigate(['join']);
+    }
+    this._cardSelectorService.getFunctionalCards().subscribe(
+      cards => {
+        console.log(cards);
+        this.allCards = cards.result;
+        const cardSelectionFormArray = new FormArray([]);
+        this.allCards.forEach(card => {
+          cardSelectionFormArray.push(new FormControl(null));
+        });
+        this.cardSelectionForm = new FormGroup({'cardsSelectors': cardSelectionFormArray}, this.CardsSelectorValidator.bind(this));
     });
-    this.cardSelectionForm = new FormGroup({'cardsSelectors': cardSelectionFormArray}, this.CardsSelectorValidator.bind(this));
   }
 
   getRowNumbers(): number[] {
@@ -60,12 +67,22 @@ export class FunctionalCardSelectorComponent implements OnInit {
       return;
     }
     this.selectedCards = [];
+    const selectedCardsIndexes = [];
     for (let i = 0; i < this.allCards.length; i++) {
       if (this.cardsSelectors.controls[i].value) {
         this.selectedCards.push(this.allCards[i]);
+        selectedCardsIndexes.push(i);
       }
     }
     console.log('You have selected the cards: ', this.selectedCards);
+    this._cardSelectorService.postFunctionalCards(sessionStorage.getItem('username'), selectedCardsIndexes).subscribe(
+      data => {
+        this._router.navigate(['hero-selector']);
+      },
+      err => {
+        sessionStorage.removeItem('username');
+        this._router.navigate(['join']);
+    });
   }
 
   CardsSelectorValidator(c: FormGroup) {

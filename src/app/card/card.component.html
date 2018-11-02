@@ -1,5 +1,5 @@
 <div class="row">
-    <img [src]="card.photo_url | safeUrl" [width]="width" [height]="height" [style.opacity]="opacity">
+    <img [src]="card.url | safeUrl" [width]="width" [height]="height" [style.opacity]="opacity">
     <div
         class="card-cover-btn btn btn-dark disabled"
         [style.width.px]="width"
@@ -15,7 +15,7 @@
         *ngIf="showStats"
         class="stats-btn btn btn-danger disabled"
         [style.left.px]="width-50"
-        [style.top.px]="height-25">{{card.heatlh}}
+        [style.top.px]="height-25">{{card.defense}}
     </div>
 </div>
 
