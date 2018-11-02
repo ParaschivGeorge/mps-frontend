@@ -5,6 +5,6 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:4321/',
-  // apiUrl: 'https://finalwhistle-api.herokuapp.com',
+  // apiUrl: 'http://localhost:4321/',
+  apiUrl: 'https://finalwhistle-api.herokuapp.com',
 };

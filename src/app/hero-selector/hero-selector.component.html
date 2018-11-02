@@ -1,13 +1,12 @@
 <form [formGroup]="cardSelectionForm" (ngSubmit)="onSubmit()" *ngIf="cardSelectionForm">
   <div formArrayName="cardsSelectors">
     <div class="row" *ngFor="let j of getRowNumbers()">
-      <div class="col-2" *ngFor="let i of getCardsNumbers(j)">
+      <div class="col-4" *ngFor="let i of getCardsNumbers(j)">
         <app-card [card]="allCards[i]" [width]="cardWidth" [height]="cardHeight" [showStats]="cardShowStats" [opacity]="getCardOpacity(i)"></app-card>
         <input type="checkbox" [style.width.px]="cardHeight" [style.height.px]="cardHeight" class="selector-checkbox" [formControlName]="i">
       </div>
     </div>
     <button type="submit">Submit</button>
-    <p>You must select {{validCardNumber}} cards! {{getSelectedCardsCount()}}/{{validCardNumber}}</p>
-    <p>Cards total cost should not exceed {{maxCost}}! {{getTotalCost()}}/{{maxCost}}</p>
+    <p>You must select {{validCardNumber}} card! {{getSelectedCardsCount()}}/{{validCardNumber}}</p>
   </div>
 </form>

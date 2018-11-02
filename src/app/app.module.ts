@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { environment } from '../environments/environment';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
 
 
 import { AppComponent } from './app.component';
@@ -16,6 +18,8 @@ import { SocketsTestService } from './sockets-test.service';
 import { MinionSelectorComponent } from './minion-selector/minion-selector.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FunctionalCardSelectorComponent } from './functional-card-selector/functional-card-selector.component';
+import { PlayerJoinComponent } from './player-join/player-join.component';
+import { HeroSelectorComponent } from './hero-selector/hero-selector.component';
 
 const config: SocketIoConfig = { url: environment.apiUrl, options: {} };
 
@@ -28,14 +32,18 @@ const config: SocketIoConfig = { url: environment.apiUrl, options: {} };
     ErrorPageComponent,
     SocketsTestComponent,
     MinionSelectorComponent,
-    FunctionalCardSelectorComponent
+    FunctionalCardSelectorComponent,
+    PlayerJoinComponent,
+    HeroSelectorComponent
   ],
   imports: [
     BrowserModule,
     DragDropModule,
     AppRoutingModule,
     SocketIoModule.forRoot(config),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
+    HttpModule
   ],
   providers: [SocketsTestService],
   bootstrap: [AppComponent]

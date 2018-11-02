@@ -1,9 +1,6 @@
 export interface Card {
     name: string;
-    heatlh: number;
+    defense: number;
     attack: number;
-    cost: number;
-    team: string;
-    description: string;
-    photo_url: string;
+    url: string;
 }
