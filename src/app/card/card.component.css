@@ -5,6 +5,7 @@
 .stats-btn {
     opacity: 1;
     position: absolute;
+    padding: 0;
 }
 
 .card-cover-btn {

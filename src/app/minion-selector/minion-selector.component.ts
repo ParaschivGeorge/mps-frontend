@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 export class MinionSelectorComponent implements OnInit {
 
   allCards: MinionCard[] = [];
-  selectedCards: MinionCard[] = [];
+  selectedCards: number[] = [];
   cardWidth = 120;
   cardHeight = 180;
   cardShowStats = false;
@@ -68,15 +68,13 @@ export class MinionSelectorComponent implements OnInit {
       return;
     }
     this.selectedCards = [];
-    const selectedCardsIndexes = [];
     for (let i = 0; i < this.allCards.length; i++) {
       if (this.cardsSelectors.controls[i].value) {
-        this.selectedCards.push(this.allCards[i]);
-        selectedCardsIndexes.push(i);
+        this.selectedCards.push(this.allCards[i].id);
       }
     }
     console.log('You have selected the cards: ', this.selectedCards);
-    this._cardSelectorService.postMinionCards(sessionStorage.getItem('username'), selectedCardsIndexes).subscribe(
+    this._cardSelectorService.postMinionCards(sessionStorage.getItem('username'), this.selectedCards).subscribe(
       data => {
         this._router.navigate(['functional-card-selector']);
       },

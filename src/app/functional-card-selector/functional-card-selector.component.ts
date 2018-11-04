@@ -13,7 +13,7 @@ import { FunctionalCard } from '../interfaces/functional-card';
 export class FunctionalCardSelectorComponent implements OnInit {
 
   allCards: FunctionalCard[] = [];
-  selectedCards: FunctionalCard[] = [];
+  selectedCards: number[] = [];
   cardWidth = 200;
   cardHeight = 300;
   cardShowStats = false;
@@ -67,15 +67,13 @@ export class FunctionalCardSelectorComponent implements OnInit {
       return;
     }
     this.selectedCards = [];
-    const selectedCardsIndexes = [];
     for (let i = 0; i < this.allCards.length; i++) {
       if (this.cardsSelectors.controls[i].value) {
-        this.selectedCards.push(this.allCards[i]);
-        selectedCardsIndexes.push(i);
+        this.selectedCards.push(this.allCards[i].id);
       }
     }
     console.log('You have selected the cards: ', this.selectedCards);
-    this._cardSelectorService.postFunctionalCards(sessionStorage.getItem('username'), selectedCardsIndexes).subscribe(
+    this._cardSelectorService.postFunctionalCards(sessionStorage.getItem('username'), this.selectedCards).subscribe(
       data => {
         this._router.navigate(['hero-selector']);
       },
