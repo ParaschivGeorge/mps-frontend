@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" *ngIf="card">
     <img [src]="card.url | safeUrl" [width]="width" [height]="height" [style.opacity]="opacity" [style.padd]>
     <div
         class="card-cover-btn btn btn-dark disabled"

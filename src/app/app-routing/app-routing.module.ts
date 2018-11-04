@@ -9,7 +9,7 @@ import { PlayerJoinComponent } from '../player-join/player-join.component';
 import { HeroSelectorComponent } from '../hero-selector/hero-selector.component';
 
 const app_Routes: Routes = [
-  { path: '', redirectTo: 'board', pathMatch: 'full'},
+  { path: '', redirectTo: 'join', pathMatch: 'full'},
   { path: 'board', component: BoardComponent},
   { path: 'sockets-test', component: SocketsTestComponent},
   { path: 'minion-selector', component: MinionSelectorComponent},
