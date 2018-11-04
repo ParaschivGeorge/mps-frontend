@@ -91,6 +91,13 @@ export class BoardComponent implements OnInit {
     }
   }
 
+  endRound() {
+    if (this.myTurn) {
+      this._boardService.endTurn(sessionStorage.getItem('username')).subscribe(data =>
+        this._boardService.endRound(sessionStorage.getItem('username')).subscribe(data2 => console.log(data2)));
+    }
+  }
+
   scores(): number[] {
     return [this._boardService.myGoalkepperScore, this._boardService.myDefendersScore, this._boardService.enemyForwardsScore,
       this._boardService.myMidfieldersScore, this._boardService.enemyMidfieldersScore, this._boardService.myForwardsScore,
@@ -101,6 +108,10 @@ export class BoardComponent implements OnInit {
     return [[this._boardService.myGoalkepper], this._boardService.myDefenders, this._boardService.enemyForwards,
       this._boardService.myMidfielders, this._boardService.enemyMidfielders, this._boardService.myForwards,
       this._boardService.enemyDefenders, [this._boardService.enemyGoalkepper]];
+  }
+
+  get username() {
+    return sessionStorage.getItem('username');
   }
 
   get myTurn() {
@@ -127,7 +138,7 @@ export class BoardComponent implements OnInit {
   get waiting() {
     return this._boardService.waiting;
   }
-  get round() {
-    return this._boardService.round;
+  get roundInfo() {
+    return this._boardService.roundInfo;
   }
 }

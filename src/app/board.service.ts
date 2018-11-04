@@ -6,6 +6,7 @@ import { Socket } from 'ngx-socket-io';
 import { HeroCard } from './interfaces/hero-card';
 import { FunctionalCard } from './interfaces/functional-card';
 import { MinionCard } from './interfaces/minion-card';
+import { Round } from './interfaces/round';
 
 @Injectable({
   providedIn: 'root'
@@ -43,7 +44,7 @@ export class BoardService {
 
   waiting = true;
 
-  round = 3;
+  roundInfo: Round;
 
   constructor(private _httpClient: HttpClient, private _socket: Socket) {
     this.gameplay().subscribe(data => {
@@ -87,6 +88,11 @@ export class BoardService {
       console.log('turn ', data);
       this.myTurn = data === sessionStorage.getItem('username');
     });
+
+    this.round().subscribe(data => {
+      console.log(data);
+      this.roundInfo = data;
+    });
    }
 
   playCard(username: string, cardId: number, cardType: string, position: string): Observable<any> {
@@ -99,6 +105,11 @@ export class BoardService {
       {username: username});
   }
 
+  endRound(username: string): Observable<any> {
+    return this._httpClient.post<any>(environment.apiUrl + '/end_round',
+      {username: username});
+  }
+
   turn(): Observable<any> {
     return this._socket
       .fromEvent('turn');
@@ -107,5 +118,10 @@ export class BoardService {
   gameplay(): Observable<any> {
     return this._socket
       .fromEvent('gameplay');
+  }
+
+  round(): Observable<any> {
+    return this._socket
+      .fromEvent('round');
   }
 }
