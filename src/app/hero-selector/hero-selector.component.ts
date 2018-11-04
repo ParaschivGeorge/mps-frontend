@@ -3,6 +3,7 @@ import { HeroCard } from '../interfaces/hero-card';
 import { FormGroup, FormArray, FormControl } from '@angular/forms';
 import { CardSelectorService } from '../card-selector.service';
 import { Router } from '@angular/router';
+import { PlayerSyncSocketsService } from '../player-sync-sockets.service';
 
 @Component({
   selector: 'app-hero-selector',
@@ -12,19 +13,25 @@ import { Router } from '@angular/router';
 export class HeroSelectorComponent implements OnInit {
 
   allCards: HeroCard[] = [];
-  selectedCards: HeroCard[] = [];
+  selectedCard: number;
   cardWidth = 200;
   cardHeight = 300;
   cardShowStats = false;
   cardSelectionForm: FormGroup;
   validCardNumber = 1;
+  waitForPlayers = false;
 
-  constructor(private _cardSelectorService: CardSelectorService, private _router: Router) { }
+  constructor(
+    private _cardSelectorService: CardSelectorService,
+    private _router: Router,
+    private _playerSyncSocketsService: PlayerSyncSocketsService) { }
 
   ngOnInit() {
     if (!sessionStorage.getItem('username')) {
       this._router.navigate(['join']);
     }
+    this._playerSyncSocketsService.allPlayersReady().subscribe(data => this._router.navigate(['board']));
+
     this._cardSelectorService.getHeroCards().subscribe(
       cards => {
         console.log(cards);
@@ -65,18 +72,16 @@ export class HeroSelectorComponent implements OnInit {
       console.log('You must select ', this.validCardNumber, ' cards');
       return;
     }
-    this.selectedCards = [];
-    let selectedCardsIndex = -1;
+    this.selectedCard = -1;
     for (let i = 0; i < this.allCards.length; i++) {
       if (this.cardsSelectors.controls[i].value) {
-        this.selectedCards.push(this.allCards[i]);
-        selectedCardsIndex = i;
+        this.selectedCard = this.allCards[i].id;
       }
     }
-    console.log('You have selected the cards: ', this.selectedCards);
-    this._cardSelectorService.postHeroCards(sessionStorage.getItem('username'), selectedCardsIndex).subscribe(
+    console.log('You have selected the cards: ', this.selectedCard);
+    this._cardSelectorService.postHeroCards(sessionStorage.getItem('username'), this.selectedCard).subscribe(
       data => {
-        this._router.navigate(['not-found']);
+        this.waitForPlayers = true;
       },
       err => {
         sessionStorage.removeItem('username');

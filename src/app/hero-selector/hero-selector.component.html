@@ -1,4 +1,4 @@
-<form [formGroup]="cardSelectionForm" (ngSubmit)="onSubmit()" *ngIf="cardSelectionForm">
+<form [formGroup]="cardSelectionForm" (ngSubmit)="onSubmit()" *ngIf="cardSelectionForm && !waitForPlayers">
   <div formArrayName="cardsSelectors">
     <div class="row" *ngFor="let j of getRowNumbers()">
       <div class="col-4" *ngFor="let i of getCardsNumbers(j)">
@@ -10,3 +10,4 @@
     <p>You must select {{validCardNumber}} card! {{getSelectedCardsCount()}}/{{validCardNumber}}</p>
   </div>
 </form>
+<p *ngIf="waitForPlayers">Waiting for player 2</p>

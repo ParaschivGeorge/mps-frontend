@@ -1,44 +1,149 @@
-<div class="row">
-  <div class="col-3 card-box">
-    <h2>Box 1</h2>
-  
-    <div
-      class="card-container"
-      cdkDropList
-      #box1list="cdkDropList"
-      [cdkDropListData]="box1"
-      [cdkDropListConnectedTo]="[box2list]"
-      (cdkDropListDropped)="drop($event)">
-      <app-card
-        class="card"
-        *ngFor="let card of box1"
-        [card]="card"
-        [width]="cardWidth"
-        [height]="cardHeight"
-        cdkDrag>
-      </app-card>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-4 stats-menu-hand">
+      <div class="row">
+        <div class="col-6  stats">
+          <div class="row">
+            <div class="col-12 score-func">
+              <p>Round: {{round}}/3</p>
+
+              <button type="button" class="btn btn-primary" disabled>{{myScore}}</button>
+              <button type="button" class="btn btn-danger" disabled>{{enemyScore}}</button>
+              <div *ngIf="myTurn">
+                <button type="button" class="btn btn-warning" (click)="endTurn()">End turn</button>
+                <button type="button" class="btn btn-success">End round</button>
+              </div>
+              <div *ngIf="!myTurn">
+                The enemy is playing his turn.
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 hero">
+              Hero
+              <app-card
+              class="card"
+              [card]="myHero"
+              [width]="cardWidth*2"
+              [height]="cardHeight*2"
+              [showStats]="false">
+              </app-card>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-6 hero">
+              Enemy
+              <app-card
+              class="card"
+              [card]="enemyHero"
+              [width]="cardWidth"
+              [height]="cardHeight"
+              [showStats]="false">
+              </app-card>
+            </div>
+            <div class="col-6">
+              <mat-spinner mode="indeterminate" *ngIf="waiting"></mat-spinner>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-3 hand">
+          <div class="row">
+            <div class="col-12 header-stat">
+              <p class="stats-p">Functional</p>
+              <p class="stats-p">Cards left: {{myFunctionals?.length}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div
+              class="col-12 functional-hand-container hand"
+              cdkDropList
+              id="functional"
+              [cdkDropListData]="myFunctionals"
+              [cdkDropListConnectedTo]="'functional_use'"
+              (cdkDropListDropped)="drop($event)">
+              <app-card
+                class="card"
+                *ngFor="let card of myFunctionals"
+                [card]="card"
+                [width]="cardWidth"
+                [height]="cardHeight"
+                cdkDrag>
+              </app-card>
+            </div>
+          </div>
+          <div class="row">
+            <div
+              class="col-12 functional-hand-use-container hand"
+              cdkDropList
+              id="functional_use"
+              [cdkDropListData]="box2"
+              [cdkDropListConnectedTo]="'functional'"
+              (cdkDropListDropped)="drop($event)">
+              Drag functional cards here to use.
+            </div>
+          </div>
+        </div>
+
+        <div class="col-3 hand">
+          <div class="row">
+            <div class="col-12 header-stat">
+              <p class="stats-p">Minions</p>
+              <p class="stats-p">Cards left: {{myHand?.length}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div
+              class="col-12 hand-container hand"
+              cdkDropList
+              id="hand"
+              [cdkDropListData]="myHand"
+              [cdkDropListConnectedTo]="boardIds"
+              (cdkDropListDropped)="drop($event)">
+              <app-card
+                class="card"
+                *ngFor="let card of myHand"
+                [card]="card"
+                [width]="cardWidth"
+                [height]="cardHeight"
+                cdkDrag>
+              </app-card>
+            </div>
+          </div>          
+        </div>
+      </div>
     </div>
-  </div>
-  
-  <div class="col-3 card-box">
-    <h2>Box 2</h2>
-  
-    <div
-      class="card-container"
-      cdkDropList
-      #box2list="cdkDropList"
-      [cdkDropListData]="box2"
-      [cdkDropListConnectedTo]="[box1list]"
-      (cdkDropListDropped)="drop($event)">
-      <app-card
-        class="card"
-        *ngFor="let card of box2"
-        [card]="card"
-        [width]="cardWidth"
-        [height]="cardHeight"
-        cdkDrag>
-      </app-card>   
+
+
+    <div class="col-1 board-part" *ngFor="let i of boardIndexes">
+      <div class="row header-stat">
+        <div class="col-12">
+          <p class="stats-p">{{getPositionName(i)}}</p>
+          <p class="stats-p">{{getScore(i)}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 board-part-box">
+          <div
+            class="board-part-container"
+            cdkDropList
+            [id]="getId(i)"
+            [cdkDropListData]="getLine(i)"
+            [cdkDropListConnectedTo]="['hand']"
+            (cdkDropListDropped)="drop($event)">
+            <app-card
+              class="card"
+              *ngFor="let card of getLine(i)"
+              [card]="card"
+              [width]="cardWidth"
+              [height]="cardHeight"
+              [showStats]="true"
+              cdkDrag>
+            </app-card>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-  
+  </div>  
 </div>

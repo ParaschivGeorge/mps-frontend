@@ -20,6 +20,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FunctionalCardSelectorComponent } from './functional-card-selector/functional-card-selector.component';
 import { PlayerJoinComponent } from './player-join/player-join.component';
 import { HeroSelectorComponent } from './hero-selector/hero-selector.component';
+import { MaterialModule } from './material.module';
 
 const config: SocketIoConfig = { url: environment.apiUrl, options: {} };
 
@@ -43,7 +44,8 @@ const config: SocketIoConfig = { url: environment.apiUrl, options: {} };
     SocketIoModule.forRoot(config),
     ReactiveFormsModule,
     HttpClientModule,
-    HttpModule
+    HttpModule,
+    MaterialModule
   ],
   providers: [SocketsTestService],
   bootstrap: [AppComponent]
