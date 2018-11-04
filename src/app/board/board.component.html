@@ -5,13 +5,37 @@
         <div class="col-6  stats">
           <div class="row">
             <div class="col-12 score-func">
-              <p>Round: {{round}}/3</p>
+              <p>Round: {{roundInfo.current_round}}/3</p>
+              <p>Round 1:
+                <mat-icon *ngIf="roundInfo.roundsWinner.round_1 === username">check_circle</mat-icon>
+                <mat-icon *ngIf="roundInfo.roundsWinner.round_1 && roundInfo.roundsWinner.round_1 !== username">close</mat-icon>
+                <mat-icon *ngIf="roundInfo.current_round === 1">play_arrow</mat-icon>
+                <mat-icon *ngIf="roundInfo.current_round < 1">query_builder</mat-icon>
+              </p>
+              <p>Round 2:
+                  <mat-icon *ngIf="roundInfo.roundsWinner.round_2 === username">check_circle</mat-icon>
+                  <mat-icon *ngIf="roundInfo.roundsWinner.round_2 && roundInfo.roundsWinner.round_2 !== username">close</mat-icon>
+                  <mat-icon *ngIf="roundInfo.current_round === 2">play_arrow</mat-icon>
+                  <mat-icon *ngIf="roundInfo.current_round < 2">query_builder</mat-icon>
+              </p>
+              <p>Round 2:
+                  <mat-icon *ngIf="roundInfo.roundsWinner.round_3 === username">check_circle</mat-icon>
+                  <mat-icon  *ngIf="roundInfo.roundsWinner.round_3 && roundInfo.roundsWinner.round_3 !== username">close</mat-icon>
+                  <mat-icon  *ngIf="roundInfo.current_round === 3 && !roundInfo.winner">play_arrow</mat-icon>
+                  <mat-icon  *ngIf="roundInfo.current_round < 3">query_builder</mat-icon>
+              </p>
+              <p *ngIf="roundInfo.winner === username">
+                You won!
+              </p>
+              <p *ngIf="roundInfo.winner && roundInfo.winner !== username">
+                You lost!
+              </p>
 
               <button type="button" class="btn btn-primary" disabled>{{myScore}}</button>
               <button type="button" class="btn btn-danger" disabled>{{enemyScore}}</button>
               <div *ngIf="myTurn">
-                <button type="button" class="btn btn-warning" (click)="endTurn()">End turn</button>
-                <button type="button" class="btn btn-success">End round</button>
+                <button type="button" class="btn btn-warning" *ngIf="!roundInfo.is_ending && !roundInfo.winner" (click)="endTurn()">End turn</button>
+                <button type="button" class="btn btn-success" *ngIf="!roundInfo.winner" (click)="endRound()">End round</button>
               </div>
               <div *ngIf="!myTurn">
                 The enemy is playing his turn.
@@ -78,7 +102,6 @@
               class="col-12 functional-hand-use-container hand"
               cdkDropList
               id="functional_use"
-              [cdkDropListData]="box2"
               [cdkDropListConnectedTo]="'functional'"
               (cdkDropListDropped)="drop($event)">
               Drag functional cards here to use.
