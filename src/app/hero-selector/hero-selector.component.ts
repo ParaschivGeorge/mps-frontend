@@ -61,7 +61,7 @@ export class HeroSelectorComponent implements OnInit {
     if (this.cardsSelectors.controls[formNumber].value) {
       return 1;
     }
-    return 0.65;
+    return 0.75;
   }
 
   get cardsSelectors(): FormArray {

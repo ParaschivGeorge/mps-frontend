@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { ErrorPageComponent } from '../error-page/error-page.component';
 import { Routes, RouterModule } from '@angular/router';
 import { BoardComponent } from '../board/board.component';
-import { SocketsTestComponent } from '../sockets-test/sockets-test.component';
 import { MinionSelectorComponent } from '../minion-selector/minion-selector.component';
 import { FunctionalCardSelectorComponent } from '../functional-card-selector/functional-card-selector.component';
 import { PlayerJoinComponent } from '../player-join/player-join.component';
@@ -11,7 +10,6 @@ import { HeroSelectorComponent } from '../hero-selector/hero-selector.component'
 const app_Routes: Routes = [
   { path: '', redirectTo: 'join', pathMatch: 'full'},
   { path: 'board', component: BoardComponent},
-  { path: 'sockets-test', component: SocketsTestComponent},
   { path: 'minion-selector', component: MinionSelectorComponent},
   { path: 'functional-card-selector', component: FunctionalCardSelectorComponent},
   { path: 'hero-selector', component: HeroSelectorComponent},

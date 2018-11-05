@@ -1,12 +1,14 @@
-<form [formGroup]="cardSelectionForm" (ngSubmit)="onSubmit()" *ngIf="cardSelectionForm">
-  <div formArrayName="cardsSelectors">
-    <div class="row" *ngFor="let j of getRowNumbers()">
-      <div class="col-2" *ngFor="let i of getCardsNumbers(j)">
-        <app-card [card]="allCards[i]" [width]="cardWidth" [height]="cardHeight" [showStats]="cardShowStats" [opacity]="getCardOpacity(i)"></app-card>
-        <input type="checkbox" [style.width.px]="cardHeight" [style.height.px]="cardHeight" class="selector-checkbox" [formControlName]="i">
+<div class="container-fluid">
+  <form [formGroup]="cardSelectionForm" (ngSubmit)="onSubmit()" *ngIf="cardSelectionForm">
+    <div formArrayName="cardsSelectors">
+      <div class="row" *ngFor="let j of getRowNumbers()" style="padding-left: 16vw;">
+        <div class="col-2" *ngFor="let i of getCardsNumbers(j)">
+          <app-card [card]="allCards[i]" [width]="cardWidth" [height]="cardHeight" [showStats]="cardShowStats" [opacity]="getCardOpacity(i)"></app-card>
+          <input type="checkbox" [style.width.px]="cardHeight" [style.height.px]="cardHeight" class="selector-checkbox" [formControlName]="i">
+        </div>
       </div>
+      <button type="submit" class="btn btn-light" style="display: block; margin: 0 auto;">Submit</button>
+      <p class="p-text">You must select {{validCardNumber}} cards! {{getSelectedCardsCount()}}/{{validCardNumber}}</p>
     </div>
-    <button type="submit">Submit</button>
-    <p>You must select {{validCardNumber}} cards! {{getSelectedCardsCount()}}/{{validCardNumber}}</p>
-  </div>
-</form>
+  </form>
+</div>

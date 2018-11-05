@@ -98,6 +98,10 @@ export class BoardComponent implements OnInit {
     }
   }
 
+  isEnemy(i: number) {
+    return i === 2 || i === 4 || i === 6 || i === 7;
+  }
+
   scores(): number[] {
     return [this._boardService.myGoalkepperScore, this._boardService.myDefendersScore, this._boardService.enemyForwardsScore,
       this._boardService.myMidfieldersScore, this._boardService.enemyMidfieldersScore, this._boardService.myForwardsScore,

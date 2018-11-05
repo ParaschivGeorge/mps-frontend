@@ -5,46 +5,47 @@
         <div class="col-6  stats">
           <div class="row">
             <div class="col-12 score-func">
-              <p>Round: {{roundInfo.current_round}}/3</p>
-              <p>Round 1:
+              <p class="p-text">Round: {{roundInfo.current_round}}/3</p>
+              <p class="p-text">Round 1:
                 <mat-icon *ngIf="roundInfo.roundsWinner.round_1 === username">check_circle</mat-icon>
                 <mat-icon *ngIf="roundInfo.roundsWinner.round_1 && roundInfo.roundsWinner.round_1 !== username">close</mat-icon>
                 <mat-icon *ngIf="roundInfo.current_round === 1">play_arrow</mat-icon>
                 <mat-icon *ngIf="roundInfo.current_round < 1">query_builder</mat-icon>
               </p>
-              <p>Round 2:
+              <p class="p-text">Round 2:
                   <mat-icon *ngIf="roundInfo.roundsWinner.round_2 === username">check_circle</mat-icon>
                   <mat-icon *ngIf="roundInfo.roundsWinner.round_2 && roundInfo.roundsWinner.round_2 !== username">close</mat-icon>
                   <mat-icon *ngIf="roundInfo.current_round === 2">play_arrow</mat-icon>
                   <mat-icon *ngIf="roundInfo.current_round < 2">query_builder</mat-icon>
               </p>
-              <p>Round 2:
+              <p class="p-text">Round 2:
                   <mat-icon *ngIf="roundInfo.roundsWinner.round_3 === username">check_circle</mat-icon>
                   <mat-icon  *ngIf="roundInfo.roundsWinner.round_3 && roundInfo.roundsWinner.round_3 !== username">close</mat-icon>
                   <mat-icon  *ngIf="roundInfo.current_round === 3 && !roundInfo.winner">play_arrow</mat-icon>
                   <mat-icon  *ngIf="roundInfo.current_round < 3">query_builder</mat-icon>
               </p>
-              <p *ngIf="roundInfo.winner === username">
+              <p *ngIf="roundInfo.winner === username" class="p-text">
                 You won!
               </p>
-              <p *ngIf="roundInfo.winner && roundInfo.winner !== username">
+              <p *ngIf="roundInfo.winner && roundInfo.winner !== username" class="p-text">
                 You lost!
               </p>
-
-              <button type="button" class="btn btn-primary" disabled>{{myScore}}</button>
-              <button type="button" class="btn btn-danger" disabled>{{enemyScore}}</button>
-              <div *ngIf="myTurn">
+              <div style="margin: 0 auto; width: fit-content;">
+                <button type="button" class="btn btn-primary" disabled>{{myScore}}</button>
+                <button type="button" class="btn btn-danger" disabled>{{enemyScore}}</button>
+              </div>
+              <div *ngIf="myTurn" style="margin: 0 auto; width: fit-content;">
                 <button type="button" class="btn btn-warning" *ngIf="!roundInfo.is_ending && !roundInfo.winner" (click)="endTurn()">End turn</button>
                 <button type="button" class="btn btn-success" *ngIf="!roundInfo.winner" (click)="endRound()">End round</button>
               </div>
-              <div *ngIf="!myTurn">
+              <p *ngIf="!myTurn" class="p-text">
                 The enemy is playing his turn.
-              </div>
+              </p>
             </div>
           </div>
           <div class="row">
             <div class="col-12 hero">
-              Hero
+              <p class="p-text">Hero</p>
               <app-card
               class="card"
               [card]="myHero"
@@ -57,7 +58,7 @@
 
           <div class="row">
             <div class="col-6 hero">
-              Enemy
+              <p class="p-text">Enemy</p>
               <app-card
               class="card"
               [card]="enemyHero"
@@ -67,7 +68,8 @@
               </app-card>
             </div>
             <div class="col-6">
-              <mat-spinner mode="indeterminate" *ngIf="waiting"></mat-spinner>
+              <!--  -->
+              <mat-spinner mode="indeterminate" *ngIf="waiting" class="loading-wheel"></mat-spinner>
             </div>
           </div>
         </div>
@@ -104,7 +106,7 @@
               id="functional_use"
               [cdkDropListConnectedTo]="'functional'"
               (cdkDropListDropped)="drop($event)">
-              Drag functional cards here to use.
+              <p class="p2-text">Drag functional cards here to use.</p>
             </div>
           </div>
         </div>
@@ -149,7 +151,8 @@
       <div class="row">
         <div class="col-12 board-part-box">
           <div
-            class="board-part-container"
+            [class.board-part-container-enemy]="isEnemy(i)"
+            [class.board-part-container-me]="!isEnemy(i)"
             cdkDropList
             [id]="getId(i)"
             [cdkDropListData]="getLine(i)"

@@ -1,4 +1,10 @@
-<form [formGroup]="nameForm" (ngSubmit)="onSubmit()">
-    <input type="text" class="selector-checkbox" formControlName="name">
-    <button type="submit">Join game</button>
-</form>
+<div class="container-fluid">
+    <div style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);">
+        <h1 class="game-title">Final Whistle</h1>
+        <img src="http://purepng.com/public/uploads/large/purepng.com-whistleobjectswhistlegame-steel-metal-object-sport-whistle-coach-631522325932qlwla.png" style="width:100px; display: block; margin: 0 auto;">
+        <form [formGroup]="nameForm" (ngSubmit)="onSubmit()">
+            <input type="text" class="selector-checkbox" formControlName="name">
+            <button type="submit">Join game</button>
+        </form>
+    </div>
+</div>
