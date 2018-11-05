@@ -13,8 +13,6 @@ import { BoardComponent } from './board/board.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
-import { SocketsTestComponent } from './sockets-test/sockets-test.component';
-import { SocketsTestService } from './sockets-test.service';
 import { MinionSelectorComponent } from './minion-selector/minion-selector.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FunctionalCardSelectorComponent } from './functional-card-selector/functional-card-selector.component';
@@ -31,7 +29,6 @@ const config: SocketIoConfig = { url: environment.apiUrl, options: {} };
     SafeUrlPipe,
     BoardComponent,
     ErrorPageComponent,
-    SocketsTestComponent,
     MinionSelectorComponent,
     FunctionalCardSelectorComponent,
     PlayerJoinComponent,
@@ -47,7 +44,7 @@ const config: SocketIoConfig = { url: environment.apiUrl, options: {} };
     HttpModule,
     MaterialModule
   ],
-  providers: [SocketsTestService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

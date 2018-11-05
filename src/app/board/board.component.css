@@ -1,43 +1,53 @@
-.board-part-container {
+.board-part-container-enemy {
     border: solid 1px #ccc;
-    background: none;
     border-radius: 4px;
     overflow: hidden;
     display: block;
     height: 95vh;
     overflow-y: auto;
+    background-color: rgba(255, 0, 0, 0.4);
+}
+
+.board-part-container-me {
+    border: solid 1px #ccc;
+    border-radius: 4px;
+    overflow: hidden;
+    display: block;
+    height: 95vh;
+    overflow-y: auto;
+    background-color: rgba(138, 255, 4, 0.4);
 }
 
 .hand-container {
     border: solid 1px #ccc;
     height: 95vh;
-    background: none;
     border-radius: 4px;
     overflow: hidden;
     display: block;
     padding: 0;
     overflow-y: auto;
+    background-color: rgba(255, 255, 255, 0.4);
 }
 
 .functional-hand-container {
     border: solid 1px #ccc;
     height: 80vh;
-    background: none;
     border-radius: 4px;
     overflow: hidden;
     display: block;
     padding: 0;
     overflow-y: auto;
+    background-color: rgba(255, 255, 255, 0.4);
 }
 
 .functional-hand-use-container {
     border: solid 1px #ccc;
     min-height: 15vh;
-    background: none;
     border-radius: 4px;
     overflow: hidden;
     display: block;
     padding: 0;
+    background-color: rgba(255, 255, 255, 0.4);
 }
 
 /* .hand {
@@ -80,7 +90,7 @@
 .board-part-box {
     border: solid 1px #ccc;
     min-height: 95vh;
-    background: white;
+    background: none;
     border-radius: 4px;
     overflow: hidden;
     display: block;
@@ -90,4 +100,34 @@
 .stats-p {
     padding: 0;
     margin: 0;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    text-align: center;
+    color: white;
+    text-shadow: 2px 2px 2px black;
+    font-size: 15px;
+}
+
+.container-fluid {
+    background-image: url("../../background.jpg");
+    min-height: 100vh;
+    background-repeat: no-repeat;   
+}
+
+.p-text {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    text-align: center;
+    color: white;
+    text-shadow: 2px 2px 2px black;
+    font-size: 15px;
+}
+
+.p2-text {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    text-align: center;
+    color: Black;
+    font-size: 15px;
+}
+
+.loading-wheel {
+    margin-top: 30px;
 }
