@@ -18,7 +18,7 @@
                   <mat-icon *ngIf="roundInfo.current_round === 2">play_arrow</mat-icon>
                   <mat-icon *ngIf="roundInfo.current_round < 2">query_builder</mat-icon>
               </p>
-              <p class="p-text">Round 2:
+              <p class="p-text">Round 3:
                   <mat-icon *ngIf="roundInfo.roundsWinner.round_3 === username">check_circle</mat-icon>
                   <mat-icon  *ngIf="roundInfo.roundsWinner.round_3 && roundInfo.roundsWinner.round_3 !== username">close</mat-icon>
                   <mat-icon  *ngIf="roundInfo.current_round === 3 && !roundInfo.winner">play_arrow</mat-icon>
@@ -68,7 +68,6 @@
               </app-card>
             </div>
             <div class="col-6">
-              <!--  -->
               <mat-spinner mode="indeterminate" *ngIf="waiting" class="loading-wheel"></mat-spinner>
             </div>
           </div>
