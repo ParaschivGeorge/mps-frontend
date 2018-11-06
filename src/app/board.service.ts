@@ -66,8 +66,8 @@ export class BoardService {
       this.myForwards = player.board.attack.cards;
       this.enemyGoalkepper = enemy.board.goalkeeper.card;
       this.enemyDefenders = enemy.board.defence.cards;
-      this.enemyMidfielders = enemy.board.goalkeeper.cards;
-      this.enemyForwards = enemy.board.mid.cards;
+      this.enemyMidfielders = enemy.board.mid.cards;
+      this.enemyForwards = enemy.board.attack.cards;
 
       this.myGoalkepperScore = player.board.goalkeeper.score;
       this.myDefendersScore = player.board.defence.score;
@@ -75,8 +75,8 @@ export class BoardService {
       this.myForwardsScore = player.board.attack.score;
       this.enemyGoalkepperScore = enemy.board.goalkeeper.score;
       this.enemyDefendersScore = enemy.board.defence.score;
-      this.enemyMidfieldersScore = enemy.board.goalkeeper.score;
-      this.enemyForwardsScore = enemy.board.mid.score;
+      this.enemyMidfieldersScore = enemy.board.mid.score;
+      this.enemyForwardsScore = enemy.board.attack.score;
 
       this.myScore = player.totalPoints;
       this.enemyScore = enemy.totalPoints;
